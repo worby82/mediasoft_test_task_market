@@ -2,7 +2,6 @@ import { createAsyncThunk, createSlice } from '@reduxjs/toolkit'
 import type { PayloadAction } from '@reduxjs/toolkit'
 import BrandsData from '../../../API/BrandsData'
 import { IBrand } from '../../../app_interfaces'
-// import { IBrandsItem } from '../../../components/ReviewItem/interface'
 
 export const fetchBrandsData = createAsyncThunk(
   'data/fetchBrandsData',
