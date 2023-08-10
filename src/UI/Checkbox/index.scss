@@ -1,0 +1,45 @@
+@import '../../assets/scss/variable.scss';
+
+.checkbox {
+  display: flex;
+  align-items: center;
+  flex-wrap: nowrap;
+  white-space: nowrap;
+  width: 100%;
+  &__hiden {
+    width: 0;
+    height: 0;
+    visibility: hidden;
+  }
+  &__custom {
+    min-width: 18px;
+    width: 18px;
+    height: 18px;
+    opacity: 0.6;
+    border: 1px solid $dark-blue;
+    border-radius: 4px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    margin-right: 10px;
+    &--checked {
+      background: $blue;
+      opacity: 1;
+      border: none;
+    }
+  }
+  &__icon {
+    width: 10px;
+    height: 10px;
+    stroke: $white;
+  }
+  &__text-icon {
+    width: 24px;
+    height: 24px;
+    opacity: 0.6;
+    margin-right: 10px;
+  }
+  &:hover {
+    cursor: pointer;
+  }
+}

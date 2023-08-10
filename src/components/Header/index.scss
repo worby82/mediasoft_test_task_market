@@ -1,0 +1,30 @@
+.header {
+  padding: 15px 0;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  border-bottom: 1px solid #aeaeae;
+  &__image {
+    max-height: 50px;
+  }
+  &__link {
+    position: relative;
+    line-height: 0;
+  }
+  &__cart-count {
+    position: absolute;
+    width: 30px;
+    height: 30px;
+    top: -10px;
+    right: -10px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    border-radius: 50%;
+    background-color: #041d36;
+    color: #fff;
+  }
+  @media (min-width: 1025px) {
+    padding: 30px 0;
+  }
+}

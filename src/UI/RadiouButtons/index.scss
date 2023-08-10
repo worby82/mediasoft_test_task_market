@@ -1,0 +1,54 @@
+@import '../../assets/scss/variable.scss';
+
+.radio-buttons {
+  display: flex;
+  row-gap: 4px;
+  column-gap: 20px;
+  flex-wrap: wrap;
+  &__title {
+    width: 100%;
+    font-size: 14px;
+    line-height: 16px;
+    color: $black;
+    opacity: 0.4;
+  }
+  &__label {
+    display: flex;
+    align-items: center;
+    flex-wrap: nowrap;
+    white-space: nowrap;
+  }
+  &__hiden {
+    width: 0;
+    height: 0;
+    visibility: hidden;
+  }
+  &__custom {
+    width: 18px;
+    height: 18px;
+    opacity: 0.6;
+    border: 1px solid $dark-blue;
+    border-radius: 50%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    margin-right: 10px;
+    position: relative;
+    &::before {
+      display: block;
+      background: $blue;
+      width: 10px;
+      height: 10px;
+      border-radius: 50%;
+    }
+    &--checked {
+      opacity: 1;
+      &.radio-buttons__custom--checked::before {
+        content: '';
+      }
+    }
+  }
+  &:hover {
+    cursor: pointer;
+  }
+}

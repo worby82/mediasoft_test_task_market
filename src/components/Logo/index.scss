@@ -1,0 +1,21 @@
+.logo {
+  line-height: 0;
+  display: flex;
+  align-items: center;
+  gap: 5px;
+  color: #0bcf6b;
+  &__image {
+    height: 60px;
+    @media (min-width: 1025px) {
+      height: 70px;
+    }
+  }
+  &__title {
+    line-height: 1.2;
+    text-align: left;
+    font-weight: 700;
+  }
+  &:hover {
+    color: #0bcf6b;
+  }
+}

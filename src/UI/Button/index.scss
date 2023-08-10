@@ -1,0 +1,66 @@
+@import '../../assets/scss/variable.scss';
+
+.button {
+  display: flex;
+  flex-direction: row;
+  justify-content: center;
+  align-items: center;
+  padding: 11px 20px;
+  background: $dark-blue;
+  border-radius: 30px;
+  font-family: 'Roboto';
+  font-style: normal;
+  font-weight: 400;
+  font-size: 16px;
+  line-height: 19px;
+  color: $white;
+  border: 1px solid $dark-blue;
+  transition: .3s;
+  &:hover {
+    background: $blue;
+    border: 1px solid $blue;
+    cursor: pointer;
+    transition: .3s;
+  }
+  &--disable {
+    opacity: .4;
+    &:hover {
+      opacity: .4;
+      cursor: default;
+      border: 1px solid $dark-blue;
+      background: $dark-blue;
+    }
+  }
+  &--transparent {
+    background: $white;
+    color: $dark-blue;
+    &:hover {
+      background: $white;
+      color: $blue;
+    }
+  }
+  &--red {
+    background: $white;
+    border: 1px solid $red;
+    color: $red;
+    &:hover {
+      background: $white;
+      border: 1px solid $red;
+      opacity: .8;
+    }
+  }
+  &--search {
+    border: none;
+    &:hover {
+      border: none;
+      background: linear-gradient(90deg, #002D72 12.36%, #0343A5 96.03%);
+    }
+  }
+  // &--disable {
+  //   opacity: .4;
+  //   &:hover {
+  //     opacity: .4;
+  //     cursor: default;
+  //   }
+  // }
+}
