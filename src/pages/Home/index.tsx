@@ -1,12 +1,12 @@
 import { useEffect } from "react";
 
-import Container from "../../UI/Container";
+import Filter from "../../components/Filter";
+import ProductList from "../../components/ProductList";
+import Sorting from "../../components/Sorting";
 
 import bemClassName from "../../utils/bem";
 
 import "./index.scss";
-import Filter from "../../components/Filter";
-import ProductList from "../../components/ProductList";
 
 const home = bemClassName("home");
 
@@ -18,7 +18,10 @@ const Home = () => {
   return (
     <div className={home()}>
       <Filter/>
-      <ProductList />
+      <div className={home('right-content')}>
+        <Sorting />
+        <ProductList />
+      </div>
     </div>
   );
 };

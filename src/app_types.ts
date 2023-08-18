@@ -6,4 +6,4 @@ export type ProductItemType = "configurable" | "simple"
 
 export type AttributeCode = "color" | "size"
 
-export type SortedValue = 'name' | 'price'
+export type SortedValue = 'name' | 'price' | 'raiting'

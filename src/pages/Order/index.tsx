@@ -1,21 +1,26 @@
 import { useEffect } from "react";
 
-import Container from "../../UI/Container";
+import StepTabs from "../../components/StepTabs";
 
 import bemClassName from "../../utils/bem";
 
 import "./index.scss";
 
+export interface IRequired {
+  name: string;
+  valid: boolean;
+}
 const order = bemClassName("order");
 
 const Order = () => {
   useEffect(() => {
-    document.title = "Order | Mediasoft Market";
+    document.title = "Оформление заказа | Mediasoft Market";
   }, []);
 
   return (
-    <>
-    </>
+    <div className={order()}>
+      <StepTabs />
+    </div>
   );
 };
 

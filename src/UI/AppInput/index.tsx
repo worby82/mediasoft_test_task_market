@@ -10,15 +10,16 @@ const appInput = bemClassName("app-input");
 
 const AppInput: React.FC<IAppInput> = ({
   type,
+  name,
   text,
   externalClassName = "",
   placeholder = "",
   handleExternal,
   required,
-  validate,
+  handleExternalRequired
 }) => {
   const [value, setValue] = useState<string | null>(null);
-  const [invalid, setInvalid] = useState(false);
+  const [valid, setValid] = useState(true);
 
   const input = useRef<HTMLInputElement>(null);
 
@@ -41,49 +42,46 @@ const AppInput: React.FC<IAppInput> = ({
           )} ${value.slice(8, 10)}`;
           setValue(value.trim());
           if (input.current.value.replace(/\s/g, "").length < 12) {
-            setInvalid(true);
+            setValid(false);
           } else {
-            setInvalid(false);
+            setValid(true);
           }
         }
       }
     } else {
       setValue(input.current!.value);
-    }
-    if (value?.length === 0) {
-      setInvalid(true);
-    } else {
-      setInvalid(false);
+      if (value?.length === 0) {
+        setValid(false);
+      } else {
+        setValid(true);
+      }
     }
   };
 
   const handleBlur = () => {
-    if (validate) {
-      if (type === TEL) {
-        if (value && value.replace(/\s/g, "").length < 12) {
-          setInvalid(true);
-        } else {
-          setInvalid(false);
-        }
-      }
-    }
     if (required) {
       if (type === TEXT) {
         if (value?.length === 0) {
-          setInvalid(true);
+          setValid(false);
         } else {
-          setInvalid(false);
+          setValid(true);
         }
       }
       if (type === TEL) {
         if (value && value.replace(/\s/g, "").length < 12) {
-          setInvalid(true);
+          setValid(false);
         } else {
-          setInvalid(false);
+          setValid(true);
         }
       }
     }
   };
+
+  useEffect(() => {
+    if(handleExternalRequired) {
+      handleExternalRequired({name: name, valid: value && value.length > 0 && value !== '+7'? valid: false})
+    }
+  }, [value, valid])
 
   useEffect(() => {
     if (handleExternal) {
@@ -93,11 +91,18 @@ const AppInput: React.FC<IAppInput> = ({
         handleExternal(value);
       }
     }
+    if(type === TEXT) {
+      if (value?.length !== 0 && required) {
+        setValid(true);
+      }
+    }
   }, [value]);
 
   useEffect(() => {
     if (type === TEL) {
       setValue("+7");
+    } else {
+      setValue('')
     }
   }, []);
   return (
@@ -107,14 +112,14 @@ const AppInput: React.FC<IAppInput> = ({
         ref={input}
         onChange={handleChange}
         onBlur={handleBlur}
-        className={appInput("field", { error: invalid })}
+        className={appInput("field", { error: !valid })}
         type={type}
         placeholder={placeholder}
         value={value ?? ""}
         required={required}
+        name={name}
       />
-      {invalid && validate && <p className={appInput("error")}>{validate}</p>}
-      {required && invalid && (
+      {required && !valid && (
         <p className={appInput("error")}>Обязательное поле</p>
       )}
     </label>

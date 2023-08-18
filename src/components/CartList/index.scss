@@ -1,0 +1,19 @@
+.cart-list {
+  padding: 20px 0;
+  display: flex;
+  flex-direction: column;
+  gap: 15px;
+  &__footer {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    flex-wrap: wrap;
+    gap: 15px;
+    @media (min-width: 540px) {
+      justify-content: space-between;
+    }
+  }
+  &__order-button {
+    margin: 0;
+  }
+}

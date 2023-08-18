@@ -46,10 +46,12 @@ const Counter: React.FC<ICounter> = ({
 
   return (
     <div className={counter()}>
-      <p className={counter("text")}>
-        {text}
-        {note && <span className={counter("note")}>{note}</span>}
-      </p>
+      { text &&
+        <p className={counter("text")}>
+          {text}
+          {note && <span className={counter("note")}>{note}</span>}
+        </p>
+      }
       <div className={counter("field")}>
         <span
           onClick={handleClickDecrement}

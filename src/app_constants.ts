@@ -14,3 +14,4 @@ export const SIZE: AttributeCode = "size"
 
 export const NAME: SortedValue = "name"
 export const PRICE: SortedValue = "price"
+export const RAITING: SortedValue = "raiting"

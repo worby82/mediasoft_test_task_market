@@ -3,19 +3,20 @@
     "type": "simple",
     "id": 1,
     "sku": "s1",
-    "title": "Product 1",
+    "title": "Кожаная куртка",
     "regular_price": {
       "currency": "USD",
       "value": 27.12
     },
     "image": "/images/1.png",
-    "brand": 9
+    "brand": 9,
+    "raiting": 3.5
   },
   {
     "type": "configurable",
     "id": 2,
     "sku": "c1",
-    "title": "Product 2",
+    "title": "Шорты",
     "regular_price": {
       "currency": "USD",
       "value": 54.21
@@ -134,73 +135,79 @@
         }
       }
     ],
-    "brand": 1
+    "brand": 1,
+    "raiting": 1.0
   },
   {
     "type": "simple",
     "id": 3,
     "sku": "s2",
-    "title": "Product 3",
+    "title": "Кофта",
     "regular_price": {
       "currency": "USD",
       "value": 36.87
     },
     "image": "/images/2.png",
-    "brand": 8
+    "brand": 8,
+    "raiting": 3.7
   },
   {
     "type": "simple",
     "id": 4,
     "sku": "s3",
-    "title": "Product 4",
+    "title": "Футболка с принтом",
     "regular_price": {
       "currency": "USD",
       "value": 28.91
     },
     "image": "/images/3.png",
-    "brand": 2
+    "brand": 2,
+    "raiting": 4.8
   },
   {
     "type": "simple",
     "id": 5,
     "sku": "s4",
-    "title": "Product 5",
+    "title": "Футболка в полоску",
     "regular_price": {
       "currency": "USD",
       "value": 41.23
     },
     "image": "/images/4.png",
-    "brand": 7
+    "brand": 7,
+    "raiting": 3.1
   },
   {
     "type": "simple",
     "id": 6,
     "sku": "s5",
-    "title": "Product 6",
+    "title": "Поло без воротника",
     "regular_price": {
       "currency": "USD",
       "value": 88.00
     },
     "image": "/images/5.png",
-    "brand": 3
+    "brand": 3,
+    "raiting": 3.6
   },
   {
     "type": "simple",
     "id": 7,
     "sku": "s6",
-    "title": "Product 7",
+    "title": "Поло",
     "regular_price": {
       "currency": "USD",
       "value": 127.41
     },
     "image": "/images/6.png",
-    "brand": 6
+    "brand": 6,
+    "raiting": 5.0
   },
   {
     "type": "configurable",
     "id": 8,
     "sku": "c2",
-    "title": "Product 8",
+    "title": "Шорты джинсовые",
     "regular_price": {
       "currency": "USD",
       "value": 63.27
@@ -319,25 +326,27 @@
         }
       }
     ],
-    "brand": 4
+    "brand": 4,
+    "raiting": 4.3
   },
   {
     "type": "simple",
     "id": 9,
     "sku": "s7",
-    "title": "Product 9",
+    "title": "Свитшот",
     "regular_price": {
       "currency": "USD",
       "value": 123.40
     },
     "image": "/images/7.png",
-    "brand": 5
+    "brand": 5,
+    "raiting": 2.7
   },
   {
     "type": "configurable",
     "id": 10,
     "sku": "c3",
-    "title": "Product 10",
+    "title": "Шорты спортивные",
     "regular_price": {
       "currency": "USD",
       "value": 68.273
@@ -456,30 +465,33 @@
         }
       }
     ],
-    "brand": 3
+    "brand": 3,
+    "raiting": 4.6
   },
   {
     "type": "simple",
     "id": 11,
     "sku": "s8",
-    "title": "Product 11",
+    "title": "Бомбер",
     "regular_price": {
       "currency": "USD",
       "value": 92.32
     },
     "image": "/images/8.png",
-    "brand": 1
+    "brand": 1,
+    "raiting": 3.9
   },
   {
     "type": "simple",
     "id": 12,
     "sku": "s9",
-    "title": "Product 12",
+    "title": "Рюкзак",
     "regular_price": {
       "currency": "USD",
       "value": 53.40
     },
     "image": "/images/9.png",
-    "brand": 2
+    "brand": 2,
+    "raiting": 4.1
   }
 ]

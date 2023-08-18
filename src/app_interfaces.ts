@@ -1,15 +1,5 @@
 import { AttributeCode, ProductItemType } from "./app_types"
 
-export interface ILike {
-  id: number
-}
-
-
-
-export interface ICartItem {
-  id: number
-  count: number
-}
 export interface IProductItem {
   type: ProductItemType
   id: number
@@ -20,6 +10,7 @@ export interface IProductItem {
   configurable_options?: Array<IConfigurableOption>
   variants?: Array<IVariant>
   brand: number
+  raiting: number
 }
 export interface IRegularPrice {
   currency: string
@@ -56,3 +47,37 @@ export interface IBrand {
   code: string
 }
 
+export interface ISelectedOption {
+  code: string;
+  value_index: number | null;
+}
+
+export interface IFilteredOptions {
+  code: string;
+  valueIndexes: Array<Number>;
+}
+
+export interface ICartAtribute {
+  code_label: string
+  value_label: string
+}
+
+export interface ICartProduct {
+  id: number
+  image: string
+  title: string
+  regular_price: IRegularPrice
+  attributes?: Array<ICartAtribute>
+  count: number
+  brand: string
+}
+
+export interface ICartProductCount {
+  id: number
+  count: number
+}
+
+export interface IRequired {
+  name: string;
+  valid: boolean;
+}

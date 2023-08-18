@@ -1,118 +1,213 @@
-import { IProductItem } from "../../app_interfaces";
+import { useEffect, useState } from "react";
+import { useDispatch, useSelector } from "react-redux";
+import { RootState } from "../../store";
+import { setCartProduct } from "../../store/reducers/data/cartDataSlice";
+
+import { CONFIGURABLE, SIMPLE } from "../../app_constants";
+import {
+  IConfigurableOption,
+  IFilteredOptions,
+  ISelectedOption,
+  IVariant,
+  IVariantAttribute,
+} from "../../app_interfaces";
+import { IProductItemProps } from "./interface";
+
 import bemClassName from "../../utils/bem";
+import priceFormat from "../../utils/priceFormat";
+import getBrandTitle from "../../utils/getBrandTitle";
+
+import ConfigurableOptions from "../ConfigurableOptions";
+import Button from "../../UI/Button";
 
 import "./index.scss";
+import Raiting from "../../UI/Raiting";
 
-const productItem = bemClassName('product-item');
+const productItem = bemClassName("product-item");
 
-const ProductItem = ({product}: {product: IProductItem}) => {
-  
+const ProductItem: React.FC<IProductItemProps> = ({ product }) => {
+  const cartProducts = useSelector(
+    (state: RootState) => state.cartData.cartProducts
+  );
+  const brands = useSelector((state: RootState) => state.brandsData.data);
+
+  const [selectedVariant, setSelectedVariant] = useState<IVariant | null>(null);
+  const [selectedOptions, setSelectedOptions] = useState<
+    Array<ISelectedOption>
+  >([]);
+  const [filteredOptions, setFilteredOptions] =
+    useState<IFilteredOptions | null>(null);
+  const [isHasInCart, setIsHasInCart] = useState(false);
+
+  const dispatch = useDispatch();
+
+  const handleSetSelectedOptions = (option: ISelectedOption) => {
+    if (selectedOptions) {
+      if (
+        selectedOptions.length > 0 &&
+        selectedOptions.find(
+          (selectedOption: ISelectedOption) =>
+            selectedOption.code === option.code
+        )
+      ) {
+        if (option.value_index !== null) {
+          setSelectedOptions([option]);
+        } else {
+          setSelectedOptions(
+            [...selectedOptions].filter(
+              (selectedOption: ISelectedOption) =>
+                selectedOption.code !== option.code
+            )
+          );
+        }
+      } else {
+        setSelectedOptions([...selectedOptions, option]);
+      }
+    }
+  };
+
+  const handleAddToCart = () => {
+    const cartAtributes =
+      product.type === CONFIGURABLE && selectedVariant
+        ? selectedVariant.attributes.map((atribute: IVariantAttribute) => {
+            const option = product.configurable_options!.find(
+              (option) => option.attribute_code === atribute.code
+            );
+            return {
+              code_label: option!.label,
+              value_label: option!.values.find(
+                (value) => value.value_index === atribute.value_index
+              )!.label,
+            };
+          })
+        : undefined;
+    const cartProduct = {
+      id:
+        product.type === CONFIGURABLE && selectedVariant
+          ? selectedVariant.product.id
+          : product.id,
+      image:
+        product.type === CONFIGURABLE && selectedVariant
+          ? selectedVariant.product.image
+          : product.image,
+      title: product.title,
+      regular_price: product.regular_price,
+      attributes: cartAtributes,
+      count: 1,
+      brand: getBrandTitle(product.brand, brands) ?? "",
+    };
+    dispatch(setCartProduct(cartProduct));
+  };
+
+  useEffect(() => {
+    if (selectedOptions.length === product.configurable_options?.length) {
+      if (product.variants) {
+        setSelectedVariant(
+          product.variants.find(
+            (variant: IVariant) =>
+              JSON.stringify(variant.attributes) ===
+              JSON.stringify([
+                ...selectedOptions.sort((prev, next) =>
+                  prev.code.localeCompare(next.code)
+                ),
+              ])
+          ) ?? null
+        );
+      }
+    } else if (selectedOptions.length > 0) {
+      setSelectedVariant(null);
+      const filteredVariants = product.variants?.filter(
+        (variant: IVariant) =>
+          variant.attributes.find(
+            (atribute: IVariantAttribute) =>
+              atribute.code === selectedOptions[0].code
+          )?.value_index === selectedOptions[0].value_index
+      );
+      const valueIndexes =
+        filteredVariants!.map(
+          (variant) =>
+            variant.attributes.find(
+              (atribute) => atribute.code !== selectedOptions[0].code
+            )!.value_index
+        ) ?? null;
+      setFilteredOptions({
+        code: selectedOptions[0].code,
+        valueIndexes: valueIndexes,
+      });
+    } else {
+      setFilteredOptions(null);
+    }
+  }, [selectedOptions]);
+  useEffect(() => {
+    if (product.type === SIMPLE) {
+      setIsHasInCart(
+        cartProducts.some((cartProduct) => cartProduct.id === product.id)
+      );
+    } else if (selectedVariant) {
+      setIsHasInCart(
+        cartProducts.some(
+          (cartProduct) => cartProduct.id === selectedVariant.product.id
+        )
+      );
+    }
+  }, [selectedVariant, cartProducts]);
   return (
     <div className={productItem()}>
-      <img className={productItem("image")} src={product.image} alt={product.title} />
-
-{/* <div class="product-item">
-    <img class="product-item__image" :src="image" :alt="product.title" />
-    <div class="product-item__info">
-      <h3>{{ product.title }}</h3>
-      <p>brand: {{ product.brand }}</p>
-      <p>
-        {{
-          priceFormat(
+      <img
+        className={productItem("image")}
+        src={selectedVariant?.product.image ?? product.image}
+        alt={product.title}
+      />
+      <div className={productItem("info")}>
+        <h3>{product.title}</h3>
+        <p>{getBrandTitle(product.brand, brands) ?? ""}</p>
+        <p>
+          {priceFormat(
             product.regular_price.currency,
             product.regular_price.value
-          )
-        }}
-      </p>
-      <template v-if="product.type !== 'simple'">
-        <div
-          class="product-item__options"
-          v-for="option in product.configurable_options"
-          :key="option.attribute_id"
-        >
-          <template v-if="option.attribute_code === 'color'">
-            <div
-              class="product-item__option-item"
-              :class="[
-                {
-                  'product-item__option-item--active':
-                    selectedColor === value.value_index,
-                },
-                {
-                  'product-item__option-item--disable':
-                    !variantsId.includes(value.value_index) &&
-                    variantsCode === 'size',
-                },
-              ]"
-              v-for="value in option.values"
-              :key="value.value_index"
-              :style="{ 'background-color': value.value }"
-              @click="
-                variantsId.length !== 0 &&
-                variantsCode !== null &&
-                variantsCode === 'size'
-                  ? variantsId.includes(value.value_index) &&
-                    setSelectedColor(value.value_index)
-                  : setSelectedColor(value.value_index)
-              "
-            ></div>
-          </template>
-          <template v-else>
-            <div
-              class="product-item__option-item"
-              :class="[
-                {
-                  'product-item__option-item--active':
-                    selectedSize === value.value_index,
-                },
-                {
-                  'product-item__option-item--disable':
-                    !variantsId.includes(value.value_index) &&
-                    variantsCode === 'color',
-                },
-              ]"
-              v-for="value in option.values"
-              :key="value.value_index"
-              @click="
-                variantsId.length !== 0 &&
-                variantsCode !== null &&
-                variantsCode === 'color'
-                  ? variantsId.includes(value.value_index) &&
-                    setSelectedSize(value.value_index)
-                  : setSelectedSize(value.value_index)
-              "
-            >
-              {{ value.label }}
-            </div>
-          </template>
-        </div>
-        <template v-if="selectedColor && selectedSize">
-          <button
-            v-if="!cartItems.some((item) => item.id === getProductId())"
-            class="button"
-            @click="setCartItem({ id: getProductId(), count: 1 })"
-          >
-            Add to cart
-          </button>
-          <p v-else>Product in the shopping cart</p>
-        </template>
-        <p v-else>Сhoose a color and size</p>
-      </template>
-      <template v-else>
-        <button
-          v-if="!cartItems.some((item) => item.id === getProductId())"
-          class="button"
-          @click="setCartItem({ id: getProductId(), count: 1 })"
-        >
-          Add to cart
-        </button>
-        <p v-else>Product in the shopping cart</p>
-      </template>
+          )}
+        </p>
+        <Raiting count={product.raiting} full />
+        {product.type === "configurable" ? (
+          <>
+            {product.configurable_options &&
+              product.configurable_options.map(
+                (option: IConfigurableOption) => (
+                  <ConfigurableOptions
+                    key={option.attribute_id}
+                    option={option}
+                    handleExternal={handleSetSelectedOptions}
+                    selectedOption={selectedOptions.find(
+                      (item: ISelectedOption) =>
+                        item.code === option.attribute_code
+                    )}
+                    filteredOptions={
+                      filteredOptions &&
+                      filteredOptions.code !== option.attribute_code
+                        ? filteredOptions
+                        : undefined
+                    }
+                  />
+                )
+              )}
+            {selectedVariant ? (
+              isHasInCart ? (
+                <p>Уже в корзине</p>
+              ) : (
+                <Button text="В корзину" handleExternal={handleAddToCart} />
+              )
+            ) : (
+              <p>Выберите атрибуты</p>
+            )}
+          </>
+        ) : isHasInCart ? (
+          <p>Уже в корзине</p>
+        ) : (
+          <Button text="В корзину" handleExternal={handleAddToCart} />
+        )}
+      </div>
     </div>
-  </div> */}
-
-    </div>
-  )
-}
+  );
+};
 
 export default ProductItem;

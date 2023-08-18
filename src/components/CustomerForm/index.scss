@@ -1,0 +1,11 @@
+.customer-form {
+  width: 100%;
+  display: flex;
+  flex-direction: column;
+  gap: 15px;
+  &__field.app-input {
+    width: 100%;
+    align-items: flex-start;
+    gap: 10px;
+  }
+}

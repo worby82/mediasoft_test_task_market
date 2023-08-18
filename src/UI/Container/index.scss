@@ -1,15 +1,12 @@
 .container {
   width: 100%;
+  height: 100%;
   padding: 0 10px;
   margin: 0 auto;
+  display: flex;
+  flex-direction: column;
   @media (min-width: 1364px) {
     max-width: 1344px;
     padding: 0;
-  }
-  &--catalog {
-    @media (min-width: 1364px) {
-      max-width: calc(1344px + (100% - 1344px)/2);
-      margin-left: calc((100% - 1344px)/2);
-    }
   }
 }

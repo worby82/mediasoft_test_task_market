@@ -9,10 +9,7 @@ const Button: React.FC<IButton> = ({
   text,
   handleExternal,
   externalClassName = "",
-  transparent,
-  red,
-  disable,
-  search,
+  disabled
 }) => {
   const handleClick = () => {
     if (handleExternal) {
@@ -22,12 +19,7 @@ const Button: React.FC<IButton> = ({
 
   return (
     <button
-      className={`${button({
-        transparent,
-        red,
-        disable,
-        search,
-      })} ${externalClassName}`}
+      className={`${button({disabled})} ${externalClassName}`}
       type="button"
       onClick={handleClick}
     >

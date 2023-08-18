@@ -3,6 +3,6 @@ export interface ICounter {
   handleExternal?: any
   minValue?: number
   maxValue?: number
-  text: string
+  text?: string
   note?: string
 }

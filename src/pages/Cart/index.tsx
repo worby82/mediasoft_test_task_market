@@ -1,6 +1,6 @@
 import { useEffect } from "react";
 
-import Container from "../../UI/Container";
+import CartList from "../../components/CartList";
 
 import bemClassName from "../../utils/bem";
 
@@ -9,13 +9,16 @@ import "./index.scss";
 const cart = bemClassName("cart");
 
 const Cart = () => {
+  
   useEffect(() => {
-    document.title = "Cart | Mediasoft Market";
+    document.title = "Корзина | Mediasoft Market";
   }, []);
 
   return (
-    <>
-    </>
+    <div className={cart()}>
+      <h1>Корзина</h1>
+      <CartList />
+    </div>
   );
 };
 
