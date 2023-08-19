@@ -50,14 +50,14 @@ const CreditCard: React.FC<ICreditCard> = ({handleExternal}) => {
           setCardNumber(null);
         }
         break;
-        case CARDHOLDER:
-          setCardHolder(
-            event.currentTarget.value !== ""
-            ? event.currentTarget.value
-            : null
-            )
-            break;
-            case CARDCVV:
+      case CARDHOLDER:
+        setCardHolder(
+          event.currentTarget.value !== ""
+          ? event.currentTarget.value
+          : null
+          )
+          break;
+      case CARDCVV:
         setCardCvv(
           event.currentTarget.value !== ""
           ? event.currentTarget.value.replace(/[^0-9]/, "")
@@ -221,6 +221,7 @@ const CreditCard: React.FC<ICreditCard> = ({handleExternal}) => {
               <input
                 type="text"
                 maxLength={3}
+                value={cardCvv ? cardCvv : ""}
                 className={creditCard('input')}
                 onFocus={() => setIsFlip(true)}
                 onBlur={() => setIsFlip(false)}

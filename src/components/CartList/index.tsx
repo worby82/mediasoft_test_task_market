@@ -38,7 +38,7 @@ const CartList = () => {
         <h2 className="subotal">Итого: {priceFormat("USD", +subtotalCart)}</h2>
         <Button
           text="Оформить заказ"
-          handleExternal={() => navigate("/order")}
+          handleExternal={() => navigate("/mediasoft_test_task_market/order")}
           externalClassName={cartList("order-button")}
         />
       </div>

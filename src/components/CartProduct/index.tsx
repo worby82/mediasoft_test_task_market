@@ -20,7 +20,11 @@ const CartProduct: React.FC<ICartProductProps> = ({ cartProduct }) => {
   const dispatch = useDispatch();
 
   const handleChangeCount = (event: React.ChangeEvent<HTMLInputElement>) => {
-    setCountValue(+event.target.value.replace(/\s/g, ""));
+    if(+event.target.value !== 0) {
+      setCountValue(+event.target.value.replace(/\s/g, ""));
+    } else {
+      event.preventDefault()
+    }
   };
   useEffect(() => {
     dispatch(

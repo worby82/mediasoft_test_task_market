@@ -28,7 +28,7 @@ const Header = () => {
   return (
     <header className={header()}>
       <Logo />
-      <Link className={header("link")} to={"/cart"}>
+      <Link className={header("link")} to={"/mediasoft_test_task_market/cart"}>
         <img className={header("image")} src={cartImage} alt="" />
         <div className={header("cart-count")}>{totalCartCount}</div>
       </Link>

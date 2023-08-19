@@ -10,7 +10,7 @@ const logo = bemClassName("logo");
 
 const Logo = () => {
   return (
-    <Link className={logo()} to={"/"}>
+    <Link className={logo()} to={"/mediasoft_test_task_market/"}>
       <img className={logo("image")} src={logoPNG} alt="Логотип" />
       <h3 className={logo("title")}>
         Mediasoft

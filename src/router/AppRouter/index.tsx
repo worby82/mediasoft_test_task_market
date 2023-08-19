@@ -16,9 +16,9 @@ function AppRouter() {
       <Header />
       <Main>
         <Routes>
-          <Route path="/" element={<Home />} />
-          <Route path="/cart" element={<Cart />} />
-          <Route path="/order" element={<Order />} />
+          <Route path="/mediasoft_test_task_market/" element={<Home />} />
+          <Route path="/mediasoft_test_task_market/cart" element={<Cart />} />
+          <Route path="/mediasoft_test_task_market/order" element={<Order />} />
         </Routes>
       </Main>
     </Container>
