@@ -106,11 +106,15 @@
     font-size: 16px;
     line-height: 1;
     white-space: nowrap;
-    max-width: 100%;
+    max-width: 120px;
     overflow: hidden;
     text-overflow: ellipsis;
     text-transform: uppercase;
+    @media screen and (min-width: 360px) {
+      max-width: 160px;
+    }
     @media screen and (min-width: 480px) {
+      max-width: 270px;
       font-size: 18px;
     }
   }
@@ -154,18 +158,18 @@
     padding-right: 10px;
     font-size: 15px;
     font-weight: 500;
-    color: #fff;
+    color: $white;
     margin-bottom: 5px;
   }
   &__cvv-band {
     height: 45px;
-    background: #fff;
+    background: $white;
     text-align: right;
     display: flex;
     align-items: center;
     justify-content: flex-end;
     padding-right: 10px;
-    color: #1a3b5d;
+    color: $dark-blue;
     font-size: 18px;
     border-radius: 4px;
     @media screen and (min-width: 360px) {
@@ -230,15 +234,15 @@
   &__input {
     padding: 10px;
     width: 100%;
-    background: #FFFFFF;
-    border: 1px solid #002D72;
+    background: $white;
+    border: 1px solid $dark-blue;
     border-radius: 10px;
   }
   &__select {
     padding: 10px;
     width: 100%;
-    background: #FFFFFF;
-    border: 1px solid #002D72;
+    background: $white;
+    border: 1px solid $dark-blue;
     border-radius: 10px;
   }
 }

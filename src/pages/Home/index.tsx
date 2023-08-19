@@ -17,8 +17,8 @@ const Home = () => {
 
   return (
     <div className={home()}>
-      <Filter/>
-      <div className={home('right-content')}>
+      <Filter />
+      <div className={home("right-content")}>
         <Sorting />
         <ProductList />
       </div>

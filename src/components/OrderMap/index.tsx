@@ -6,7 +6,7 @@ import Map from "../Map";
 import "./index.scss";
 import bemClassName from "../../utils/bem";
 
-const orderMap = bemClassName('order-map')
+const orderMap = bemClassName("order-map");
 
 const OrderMap = ({ handleExternal }: { handleExternal: any }) => {
   const [address, setAddress] = useState("");
@@ -15,10 +15,11 @@ const OrderMap = ({ handleExternal }: { handleExternal: any }) => {
     if (address && address !== "") {
       handleExternal(true);
     }
+    // eslint-disable-next-line
   }, [address]);
   return (
     <>
-      <p className={orderMap('text')}>Отметьте адрес доставки на карте</p>
+      <p className={orderMap("text")}>Отметьте адрес доставки на карте</p>
       <YMaps
         query={{
           apikey: "84ecc9c6-c811-4f3c-a5dc-21cbf96b2db9",
@@ -26,7 +27,9 @@ const OrderMap = ({ handleExternal }: { handleExternal: any }) => {
       >
         <Map setAddress={setAddress} />
       </YMaps>
-      <p className={orderMap('text')}><b>Адрес доставки:</b> {address}</p>
+      <p className={orderMap("text")}>
+        <b>Адрес доставки:</b> {address}
+      </p>
     </>
   );
 };

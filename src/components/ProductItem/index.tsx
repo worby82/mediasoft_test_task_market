@@ -19,24 +19,19 @@ import getBrandTitle from "../../utils/getBrandTitle";
 
 import ConfigurableOptions from "../ConfigurableOptions";
 import Button from "../../UI/Button";
+import Raiting from "../../UI/Raiting";
 
 import "./index.scss";
-import Raiting from "../../UI/Raiting";
 
 const productItem = bemClassName("product-item");
 
 const ProductItem: React.FC<IProductItemProps> = ({ product }) => {
-  const cartProducts = useSelector(
-    (state: RootState) => state.cartData.cartProducts
-  );
+  const cartProducts = useSelector((state: RootState) => state.cartData.cartProducts);
   const brands = useSelector((state: RootState) => state.brandsData.data);
 
   const [selectedVariant, setSelectedVariant] = useState<IVariant | null>(null);
-  const [selectedOptions, setSelectedOptions] = useState<
-    Array<ISelectedOption>
-  >([]);
-  const [filteredOptions, setFilteredOptions] =
-    useState<IFilteredOptions | null>(null);
+  const [selectedOptions, setSelectedOptions] = useState<Array<ISelectedOption>>([]);
+  const [filteredOptions, setFilteredOptions] = useState<IFilteredOptions | null>(null);
   const [isHasInCart, setIsHasInCart] = useState(false);
 
   const dispatch = useDispatch();
@@ -45,20 +40,14 @@ const ProductItem: React.FC<IProductItemProps> = ({ product }) => {
     if (selectedOptions) {
       if (
         selectedOptions.length > 0 &&
-        selectedOptions.find(
-          (selectedOption: ISelectedOption) =>
-            selectedOption.code === option.code
-        )
+        selectedOptions.find((selectedOption: ISelectedOption) => selectedOption.code === option.code)
       ) {
         if (option.value_index !== null) {
           setSelectedOptions([option]);
         } else {
-          setSelectedOptions(
-            [...selectedOptions].filter(
-              (selectedOption: ISelectedOption) =>
-                selectedOption.code !== option.code
-            )
-          );
+          setSelectedOptions([...selectedOptions].filter(
+              (selectedOption: ISelectedOption) => selectedOption.code !== option.code
+            ));
         }
       } else {
         setSelectedOptions([...selectedOptions, option]);
@@ -67,6 +56,7 @@ const ProductItem: React.FC<IProductItemProps> = ({ product }) => {
   };
 
   const handleAddToCart = () => {
+
     const cartAtributes =
       product.type === CONFIGURABLE && selectedVariant
         ? selectedVariant.attributes.map((atribute: IVariantAttribute) => {
@@ -81,13 +71,12 @@ const ProductItem: React.FC<IProductItemProps> = ({ product }) => {
             };
           })
         : undefined;
+
     const cartProduct = {
-      id:
-        product.type === CONFIGURABLE && selectedVariant
+      id: product.type === CONFIGURABLE && selectedVariant
           ? selectedVariant.product.id
           : product.id,
-      image:
-        product.type === CONFIGURABLE && selectedVariant
+      image: product.type === CONFIGURABLE && selectedVariant
           ? selectedVariant.product.image
           : product.image,
       title: product.title,
@@ -106,12 +95,9 @@ const ProductItem: React.FC<IProductItemProps> = ({ product }) => {
           product.variants.find(
             (variant: IVariant) =>
               JSON.stringify(variant.attributes) ===
-              JSON.stringify([
-                ...selectedOptions.sort((prev, next) =>
-                  prev.code.localeCompare(next.code)
-                ),
-              ])
-          ) ?? null
+              JSON.stringify([...selectedOptions.sort((prev, next) => prev.code.localeCompare(next.code))])
+          )
+          ?? null
         );
       }
     } else if (selectedOptions.length > 0) {
@@ -119,17 +105,13 @@ const ProductItem: React.FC<IProductItemProps> = ({ product }) => {
       const filteredVariants = product.variants?.filter(
         (variant: IVariant) =>
           variant.attributes.find(
-            (atribute: IVariantAttribute) =>
-              atribute.code === selectedOptions[0].code
-          )?.value_index === selectedOptions[0].value_index
+            (atribute: IVariantAttribute) => atribute.code === selectedOptions[0].code)?.value_index === selectedOptions[0].value_index
       );
       const valueIndexes =
         filteredVariants!.map(
-          (variant) =>
-            variant.attributes.find(
-              (atribute) => atribute.code !== selectedOptions[0].code
-            )!.value_index
-        ) ?? null;
+          (variant) => variant.attributes.find((atribute) => atribute.code !== selectedOptions[0].code)!.value_index
+        )
+        ?? null;
       setFilteredOptions({
         code: selectedOptions[0].code,
         valueIndexes: valueIndexes,
@@ -137,20 +119,18 @@ const ProductItem: React.FC<IProductItemProps> = ({ product }) => {
     } else {
       setFilteredOptions(null);
     }
+    // eslint-disable-next-line
   }, [selectedOptions]);
+
   useEffect(() => {
     if (product.type === SIMPLE) {
-      setIsHasInCart(
-        cartProducts.some((cartProduct) => cartProduct.id === product.id)
-      );
+      setIsHasInCart(cartProducts.some((cartProduct) => cartProduct.id === product.id));
     } else if (selectedVariant) {
-      setIsHasInCart(
-        cartProducts.some(
-          (cartProduct) => cartProduct.id === selectedVariant.product.id
-        )
-      );
+      setIsHasInCart(cartProducts.some((cartProduct) => cartProduct.id === selectedVariant.product.id));
     }
+    // eslint-disable-next-line
   }, [selectedVariant, cartProducts]);
+
   return (
     <div className={productItem()}>
       <img
@@ -162,10 +142,7 @@ const ProductItem: React.FC<IProductItemProps> = ({ product }) => {
         <h3>{product.title}</h3>
         <p>{getBrandTitle(product.brand, brands) ?? ""}</p>
         <p>
-          {priceFormat(
-            product.regular_price.currency,
-            product.regular_price.value
-          )}
+          {priceFormat(product.regular_price.currency, product.regular_price.value)}
         </p>
         <Raiting count={product.raiting} full />
         {product.type === "configurable" ? (
@@ -177,33 +154,33 @@ const ProductItem: React.FC<IProductItemProps> = ({ product }) => {
                     key={option.attribute_id}
                     option={option}
                     handleExternal={handleSetSelectedOptions}
-                    selectedOption={selectedOptions.find(
-                      (item: ISelectedOption) =>
-                        item.code === option.attribute_code
-                    )}
-                    filteredOptions={
-                      filteredOptions &&
-                      filteredOptions.code !== option.attribute_code
-                        ? filteredOptions
-                        : undefined
-                    }
+                    selectedOption={selectedOptions.find((item: ISelectedOption) => item.code === option.attribute_code)}
+                    filteredOptions={ filteredOptions && filteredOptions.code !== option.attribute_code ? filteredOptions : undefined}
                   />
                 )
               )}
             {selectedVariant ? (
               isHasInCart ? (
-                <p>Уже в корзине</p>
+                <p className={productItem("cart-info")}>Уже в корзине</p>
               ) : (
-                <Button text="В корзину" handleExternal={handleAddToCart} />
+                <Button
+                  text="В корзину"
+                  handleExternal={handleAddToCart}
+                  externalClassName={productItem("button")}
+                />
               )
             ) : (
-              <p>Выберите атрибуты</p>
+              <p className={productItem("cart-info")}>Выберите атрибуты</p>
             )}
           </>
         ) : isHasInCart ? (
-          <p>Уже в корзине</p>
+          <p className={productItem("cart-info")}>Уже в корзине</p>
         ) : (
-          <Button text="В корзину" handleExternal={handleAddToCart} />
+          <Button
+            text="В корзину"
+            handleExternal={handleAddToCart}
+            externalClassName={productItem("button")}
+          />
         )}
       </div>
     </div>

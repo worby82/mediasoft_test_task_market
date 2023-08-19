@@ -1,8 +1,8 @@
 @import '../../assets/scss/variable.scss';
 
 .button {
-  background-color: #fff;
-  border: 1px solid #041d36;
+  background-color: $white;
+  border: 1px solid $dark-blue;
   padding: 5px 15px;
   border-radius: 5px;
   transition: 0.3s;
@@ -11,19 +11,19 @@
   margin: 0 auto;
   &:hover {
     transition: 0.3s;
-    background-color: #041d36;
-    color: #fff;
+    background-color: $dark-blue;
+    color: $white;
     cursor: pointer;
   }
   &--disabled {
-    color: #aeaeae;
-    border-color: #aeaeae;
-    background: #dbdbdb;
+    color: $gray-light;
+    border-color: $gray-light;
+    background: $gray;
     &:hover {
       transition: 0.3s;
       cursor: default;
-      color: #aeaeae;
-      background: #dbdbdb;
+      color: $gray-light;
+      background: $gray;
     }
   }
 }

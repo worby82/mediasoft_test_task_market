@@ -1,0 +1,1 @@
+export interface ICreditCard {handleExternal: any}

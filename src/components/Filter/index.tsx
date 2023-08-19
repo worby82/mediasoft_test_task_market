@@ -2,12 +2,13 @@ import { useDispatch, useSelector } from "react-redux";
 import { useEffect } from "react";
 import { RootState } from "../../store";
 import { ThunkDispatch } from "redux-thunk";
-import { IBrand } from "../../app_interfaces";
 import { fetchBrandsData } from "../../store/reducers/data/brandsDataSlice";
 import {
   setSelectedBrand,
   updateProducts,
 } from "../../store/reducers/data/productsDataSlice";
+
+import { IBrand } from "../../app_interfaces";
 
 import bemClassName from "../../utils/bem";
 import "./index.scss";
@@ -16,8 +17,10 @@ const filter = bemClassName("filter");
 
 const Filter = () => {
   const brands = useSelector((state: RootState) => state.brandsData.data);
-  const selectedBrand = useSelector((state: RootState) => state.productsData.selectedBrand);
-  
+  const selectedBrand = useSelector(
+    (state: RootState) => state.productsData.selectedBrand
+  );
+
   const dispatch = useDispatch();
   const dispatchAsync = useDispatch<ThunkDispatch<any, any, any>>();
 
@@ -28,6 +31,7 @@ const Filter = () => {
 
   useEffect(() => {
     dispatch(updateProducts());
+    // eslint-disable-next-line
   }, [selectedBrand]);
   return (
     <ul className={filter()}>

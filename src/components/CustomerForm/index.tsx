@@ -1,15 +1,18 @@
 import { useEffect, useState } from "react";
 
+import { EMAIL, TEL, TEXT } from "../../app_constants";
+import { IRequired } from "../../app_interfaces";
+import { ICustomerForm } from "./interface";
+
+import AppInput from "../../UI/AppInput";
+
 import bemClassName from "../../utils/bem";
 
 import "./index.scss";
-import AppInput from "../../UI/AppInput";
-import { EMAIL, TEL, TEXT } from "../../app_constants";
-import { IRequired } from "../../app_interfaces";
 
 const customerForm = bemClassName("customer-form");
 
-const CustomerForm = ({ handleExternal } : { handleExternal: any }) => {
+const CustomerForm: React.FC<ICustomerForm> = ({ handleExternal }) => {
   const [customerDataRequired, setCustomerDataRequired] = useState<
     Array<IRequired>
   >([]);
@@ -32,6 +35,7 @@ const CustomerForm = ({ handleExternal } : { handleExternal: any }) => {
         handleExternal(false);
       }
     }
+    // eslint-disable-next-line
   }, [customerDataRequired]);
 
   return (

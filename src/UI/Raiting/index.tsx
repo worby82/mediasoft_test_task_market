@@ -21,6 +21,7 @@ const Raiting: React.FC<IRaiting> = ({
     if (count) {
       setCountValue(count);
     }
+    // eslint-disable-next-line
   }, []);
   return (
     <div className={`${raiting()} ${externalClassName}`}>

@@ -1,35 +1,16 @@
-import { useEffect } from 'react';
-import { Route, Routes } from 'react-router-dom'
-import { useDispatch } from 'react-redux';
-import { setWindowWidth } from '../../store/reducers/window/windowSlice';
+import { Route, Routes } from "react-router-dom";
 
-import Header from '../../components/Header';
-import Main from '../../components/Main';
-import Container from '../../UI/Container';
+import Header from "../../components/Header";
+import Main from "../../components/Main";
+import Container from "../../UI/Container";
 
-import Home from '../../pages/Home';
-import Cart from '../../pages/Cart';
-import Order from '../../pages/Order';
+import Home from "../../pages/Home";
+import Cart from "../../pages/Cart";
+import Order from "../../pages/Order";
 
-import './index.scss';
+import "./index.scss";
 
 function AppRouter() {
-  const dispatch = useDispatch()
-
-  useEffect(() => {
-    function handleWindowResize() {
-      dispatch(setWindowWidth(window.innerWidth))
-    }
-    
-    dispatch(setWindowWidth(window.innerWidth))
-    window.addEventListener('resize', handleWindowResize);
-
-    return () => {
-      window.removeEventListener('resize', handleWindowResize);
-    };
-    // eslint-disable-next-line
-  }, []);
-
   return (
     <Container>
       <Header />

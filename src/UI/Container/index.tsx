@@ -4,11 +4,7 @@ import "./index.scss";
 
 const container = bemClassName("container");
 
-const Container = ({
-  children,
-}: {
-  children: React.ReactNode;
-}) => {
+const Container = ({ children }: { children: React.ReactNode }) => {
   return <div className={container()}>{children}</div>;
 };
 

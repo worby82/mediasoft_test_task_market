@@ -3,7 +3,7 @@ import { useEffect } from "react";
 import { ThunkDispatch } from "@reduxjs/toolkit";
 import { RootState } from "../../store";
 import { IProductItem } from "../../app_interfaces";
-import { fetchProductsItemsData, } from "../../store/reducers/data/productsDataSlice";
+import { fetchProductsItemsData } from "../../store/reducers/data/productsDataSlice";
 
 import ProductItem from "../ProductItem";
 

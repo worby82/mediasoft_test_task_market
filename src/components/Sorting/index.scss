@@ -1,17 +1,19 @@
+@import '../../assets/scss/variable.scss';
+
 .sorting {
   display: flex;
   align-items: center;
   justify-content: flex-end;
-  border-bottom: 1px solid #aeaeae;
+  border-bottom: 1px solid $gray-light;
   padding-bottom: 10px;
   position: sticky;
   top: 0;
-  background-color: #fff;
+  background-color: $white;
   &__select {
     padding: 10px;
     width: 100%;
-    background: #FFFFFF;
-    border: 1px solid #002D72;
+    background: $white;
+    border: 1px solid $dark-blue;
     border-radius: 10px;
   }
 }

@@ -16,7 +16,7 @@ const AppInput: React.FC<IAppInput> = ({
   placeholder = "",
   handleExternal,
   required,
-  handleExternalRequired
+  handleExternalRequired,
 }) => {
   const [value, setValue] = useState<string | null>(null);
   const [valid, setValid] = useState(true);
@@ -78,10 +78,14 @@ const AppInput: React.FC<IAppInput> = ({
   };
 
   useEffect(() => {
-    if(handleExternalRequired) {
-      handleExternalRequired({name: name, valid: value && value.length > 0 && value !== '+7'? valid: false})
+    if (handleExternalRequired) {
+      handleExternalRequired({
+        name: name,
+        valid: value && value.length > 0 && value !== "+7" ? valid : false,
+      });
     }
-  }, [value, valid])
+    // eslint-disable-next-line
+  }, [value, valid]);
 
   useEffect(() => {
     if (handleExternal) {
@@ -91,19 +95,21 @@ const AppInput: React.FC<IAppInput> = ({
         handleExternal(value);
       }
     }
-    if(type === TEXT) {
+    if (type === TEXT) {
       if (value?.length !== 0 && required) {
         setValid(true);
       }
     }
+    // eslint-disable-next-line
   }, [value]);
 
   useEffect(() => {
     if (type === TEL) {
       setValue("+7");
     } else {
-      setValue('')
+      setValue("");
     }
+    // eslint-disable-next-line
   }, []);
   return (
     <label className={`${appInput()} ${externalClassName}`}>

@@ -34,9 +34,13 @@ const CartList = () => {
           <CartProduct cartProduct={cartProduct} key={cartProduct.id} />
         ))}
       </div>
-      <div className={cartList('footer')}>
+      <div className={cartList("footer")}>
         <h2 className="subotal">Итого: {priceFormat("USD", +subtotalCart)}</h2>
-        <Button text="Оформить заказ" handleExternal={() => navigate('/order')} externalClassName={cartList('order-button')} />
+        <Button
+          text="Оформить заказ"
+          handleExternal={() => navigate("/order")}
+          externalClassName={cartList("order-button")}
+        />
       </div>
     </>
   ) : (

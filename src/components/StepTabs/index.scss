@@ -1,3 +1,5 @@
+@import '../../assets/scss/variable.scss';
+
 .step-tabs {
   display: flex;
   flex-direction: column;
@@ -14,16 +16,16 @@
     display: flex;
     align-items: center;
     padding: 10px 30px;
-    color: #fff;
-    background-color: #aeaeae;
+    color: $white;
+    background-color: $gray-light;
     position: relative;
     &::after {
       content: "";
       display: block;
       width: 26px;
       height: 26px;
-      border-top: 1px solid #fff;
-      border-right: 1px solid #fff;
+      border-top: 1px solid $white;
+      border-right: 1px solid $white;
       transform: rotate(45deg);
       position: absolute;
       z-index: 1;
@@ -35,15 +37,15 @@
       }
     }
     &--active {
-      background: #c5cb07;
+      background: $yellow;
       &::after {
-        background-color: #c5cb07;
+        background-color: $yellow;
       }
     }
     &--done {
-      background: #033612;
+      background: $dark-green;
       &::after {
-        background-color: #033612;
+        background-color: $dark-green;
       }
     }
   }
@@ -64,7 +66,7 @@
   }
   &__success-text {
     font-size: 21px;
-    color: #0bcf6b;
+    color: $green;
     line-height: 26px;
   }
 }

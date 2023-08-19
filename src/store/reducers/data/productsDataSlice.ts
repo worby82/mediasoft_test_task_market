@@ -65,6 +65,7 @@ export const productsDataSlice = createSlice({
   },
 });
 
-export const { setSelectedBrand, updateProducts, setSortedValue } = productsDataSlice.actions;
+export const { setSelectedBrand, updateProducts, setSortedValue } =
+  productsDataSlice.actions;
 
 export default productsDataSlice.reducer;

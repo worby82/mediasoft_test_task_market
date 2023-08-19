@@ -9,7 +9,6 @@ import "./index.scss";
 const cart = bemClassName("cart");
 
 const Cart = () => {
-  
   useEffect(() => {
     document.title = "Корзина | Mediasoft Market";
   }, []);

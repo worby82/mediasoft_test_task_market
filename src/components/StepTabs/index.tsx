@@ -1,4 +1,6 @@
 import { useState, useEffect } from "react";
+import { useDispatch } from "react-redux";
+import { clearCartProduct } from "../../store/reducers/data/cartDataSlice";
 
 import Button from "../../UI/Button";
 import CustomerForm from "../CustomerForm";
@@ -8,8 +10,6 @@ import OrderMap from "../OrderMap";
 import bemClassName from "../../utils/bem";
 
 import "./index.scss";
-import { useDispatch } from "react-redux";
-import { clearCartProduct } from "../../store/reducers/data/cartDataSlice";
 
 const stepTabs = bemClassName("step-tabs");
 
@@ -30,10 +30,11 @@ const StepTabs = () => {
   };
 
   useEffect(() => {
-    if(stepIndex) {
+    if (stepIndex) {
       dispatch(clearCartProduct());
     }
-  }, [stepIndex])
+    // eslint-disable-next-line
+  }, [stepIndex]);
   return (
     <>
       <div className={stepTabs()}>

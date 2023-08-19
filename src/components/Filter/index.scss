@@ -1,3 +1,5 @@
+@import '../../assets/scss/variable.scss';
+
 .filter {
   width: 100%;
   max-width: 120px;
@@ -17,23 +19,24 @@
     border-radius: 5px;
     border: 1px solid transparent;
     transition: 0.3s;
+    white-space: nowrap;
 
     &:hover {
       transition: 0.3s;
-      border-color: #041d36;
-      color: #041d36;
+      border-color: $dark-blue;
+      color: $dark-blue;
       cursor: pointer;
     }
 
     &--active {
       transition: 0.3s;
-      background-color: #041d36;
-      border-color: #041d36;
-      color: #fff;
+      background-color: $dark-blue;
+      border-color: $dark-blue;
+      color: $white;
 
       &:hover {
-        background-color: #041d36;
-        color: #fff;
+        background-color: $dark-blue;
+        color: $white;
         cursor: default;
       }
     }

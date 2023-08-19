@@ -1,13 +1,13 @@
 import { useEffect, useRef, useState } from "react";
 import { useYMaps } from "@pbe/react-yandex-maps";
 
-import bemClassName from "../../utils/bem";
+import { IAppMap } from "./interface";
 
-import './index.scss'
+import bemClassName from "../../utils/bem";
 
 const mapClass = bemClassName("map");
 
-const Map = ({ setAddress }: { setAddress: any }) => {
+const Map: React.FC<IAppMap> = ({ setAddress }) => {
   const mapRef = useRef(null);
   const ymaps = useYMaps([
     "Map",
@@ -18,26 +18,28 @@ const Map = ({ setAddress }: { setAddress: any }) => {
     "control.SearchControl",
     "control.ZoomControl",
   ]);
-  const [location, setLocation] = useState<any>([55.75, 37.57]);
-  const [map, setMap] = useState<any>(null);
-  const [placemark, setPlacemark] = useState<any>(null);
+  const [location, setLocation] = useState<Array<number>>([55.75, 37.57]);
+  const [map, setMap] = useState<ymaps.Map | null>(null);
+  const [placemark, setPlacemark] = useState<ymaps.Placemark | null>(null);
 
-  const handleClickMap = (event: any) => {
+  const handleClickMap = (event: ymaps.IEvent<MouseEvent, {}>) => {
     const coord = event.get("coords");
     setLocation(coord);
     if (ymaps) {
-      ymaps.geocode(coord)
-        .then((res: any) => {
-          setAddress(res.geoObjects.get(0).getAddressLine());
-        });
+      ymaps.geocode(coord).then((res: any) => {
+        setAddress(res.geoObjects.get(0).getAddressLine());
+      });
     }
   };
 
   useEffect(() => {
     if (map && ymaps) {
       map.setCenter(location);
-      placemark.geometry?.setCoordinates(location);
+      if (placemark) {
+        placemark.geometry?.setCoordinates(location);
+      }
     }
+    // eslint-disable-next-line
   }, [location]);
 
   useEffect(() => {
@@ -76,6 +78,7 @@ const Map = ({ setAddress }: { setAddress: any }) => {
           console.log("Ошибка: " + err);
         }
       );
+      // eslint-disable-next-line
   }, [ymaps]);
 
   return (

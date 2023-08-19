@@ -1,16 +1,19 @@
 import { useState, useEffect } from "react";
 
-import cardMask from "../../utils/cardMask";
+import { CARDCVV, CARDHOLDER, CARDMONTH, CARDNUMBER, CARDYEAR, mountArray, yearArray } from "../../app_constants";
+import { CreditCardTypes } from "../../app_types";
 import { IRequired } from "../../app_interfaces";
+import { ICreditCard } from "./interface";
 
+import cardMask from "../../utils/cardMask";
 import bemClassName from "../../utils/bem";
 
-import "./index.scss";
 import cardImage from "../../assets/images/credit-card-background.jpg";
+import "./index.scss";
 
 const creditCard = bemClassName("credit-card");
 
-const CreditCard = ({handleExternal}:{handleExternal: any}) => {
+const CreditCard: React.FC<ICreditCard> = ({handleExternal}) => {
   const [cardNumber, setCardNumber] = useState<string | null>(null);
   const [cardHolder, setCardHolder] = useState<string | null>(null);
   const [cardMonth, setCardMonth] = useState<string | null>(null);
@@ -18,11 +21,8 @@ const CreditCard = ({handleExternal}:{handleExternal: any}) => {
   const [cardCvv, setCardCvv] = useState<string | null>(null);
   const [isFlip, setIsFlip] = useState<boolean>(false);
   const [cardDataRequired, setCardDataRequired] = useState<Array<IRequired>>([]);
-  
-  const mountArray = ["01", "02", "03", "04", "05", "06", "07", "08", "09", "10", "11", "12"]
-  const yearArray = ["2023", "2024", "2025", "2026", "2027", "2028", "2029", "2030", "2031", "2032", "2033", "2034"]
 
-  const getErrorText = (name: string) => {
+  const getErrorText = (name: CreditCardTypes) => {
     if(cardDataRequired.some(item => item.name === name) && !cardDataRequired.find(item => item.name === name)!.valid) {
       return <p className={creditCard('error-text')}>Обязательное поле</p>
     }
@@ -40,7 +40,7 @@ const CreditCard = ({handleExternal}:{handleExternal: any}) => {
   
   const handleInputCard = (event: React.FormEvent<HTMLInputElement>, type: string) => {
     switch (type) {
-      case 'card-number':
+      case CARDNUMBER:
         const value = event.currentTarget.value
         .replace(/\s/g, "")
         .replace(/[^0-9]/, "");
@@ -50,14 +50,14 @@ const CreditCard = ({handleExternal}:{handleExternal: any}) => {
           setCardNumber(null);
         }
         break;
-        case 'card-holder':
+        case CARDHOLDER:
           setCardHolder(
             event.currentTarget.value !== ""
             ? event.currentTarget.value
             : null
             )
             break;
-            case 'card-cvv':
+            case CARDCVV:
         setCardCvv(
           event.currentTarget.value !== ""
           ? event.currentTarget.value.replace(/[^0-9]/, "")
@@ -69,10 +69,10 @@ const CreditCard = ({handleExternal}:{handleExternal: any}) => {
   
   const handleChangeCard = (event: React.ChangeEvent<HTMLSelectElement>, type: string) => {
     switch (type) {
-      case 'card-month':
+      case CARDMONTH:
         setCardMonth(event.target.value)
         break;
-        case 'card-year':
+        case CARDYEAR:
           setCardYear(event.target.value.slice(2))
           break;
         }
@@ -80,31 +80,31 @@ const CreditCard = ({handleExternal}:{handleExternal: any}) => {
       
   useEffect(()=>{
     if(cardNumber !== null) {
-      handleCardDataRequired({name: 'card-number', valid: cardNumber.length === 19 ? true : false})
+      handleCardDataRequired({name: CARDNUMBER, valid: cardNumber.length === 19 ? true : false})
     }
   },[cardNumber])
   
   useEffect(()=>{
     if(cardHolder !== null) {
-      handleCardDataRequired({name: 'card-holder', valid: cardHolder === null || cardHolder.length > 0 ? true : false})
+      handleCardDataRequired({name: CARDHOLDER, valid: cardHolder === null || cardHolder.length > 0 ? true : false})
     }
   },[cardHolder])
   
   useEffect(()=>{
     if(cardMonth !== null) {
-      handleCardDataRequired({name: 'card-month', valid: cardMonth === null || cardMonth.length === 2 ? true : false})
+      handleCardDataRequired({name: CARDMONTH, valid: cardMonth === null || cardMonth.length === 2 ? true : false})
     }
   },[cardMonth])
 
   useEffect(()=>{
     if(cardYear !== null) {
-      handleCardDataRequired({name: 'card-year', valid: cardYear === null || cardYear.length === 2 ? true : false})
+      handleCardDataRequired({name: CARDYEAR, valid: cardYear === null || cardYear.length === 2 ? true : false})
     }
   },[cardYear])
 
   useEffect(()=>{
     if(cardCvv !== null) {
-      handleCardDataRequired({name: 'card-cvv', valid: cardCvv === null || cardCvv.length === 3 ? true : false})
+      handleCardDataRequired({name: CARDCVV, valid: cardCvv === null || cardCvv.length === 3 ? true : false})
     }
   },[cardCvv])
   
@@ -118,6 +118,7 @@ const CreditCard = ({handleExternal}:{handleExternal: any}) => {
         handleExternal(false);
       }
     }
+    // eslint-disable-next-line
   }, [cardDataRequired]);
   
   return (
@@ -125,7 +126,7 @@ const CreditCard = ({handleExternal}:{handleExternal: any}) => {
       <div className={creditCard()}>
         <div className={creditCard("flipper", { flip: isFlip })}>
           <div className={creditCard("side", { front: true })}>
-            <img className={creditCard("image")} src={cardImage} />
+            <img className={creditCard("image")} src={cardImage} alt=""/>
             <div className={creditCard("inner")}>
               <p className={creditCard('number')}>{cardMask("#### #### #### ####", cardNumber ?? "")}</p>
               <div className={creditCard('content')}>
@@ -144,6 +145,7 @@ const CreditCard = ({handleExternal}:{handleExternal: any}) => {
             <img
               className={creditCard("image", { back: true })}
               src={cardImage}
+              alt=""
             />
             <div className={creditCard("inner")}>
               <div className={creditCard('band')}></div>
@@ -162,9 +164,9 @@ const CreditCard = ({handleExternal}:{handleExternal: any}) => {
               value={cardNumber ? cardNumber : ""}
               maxLength={19}
               className={creditCard('input')}
-              onInput={(event) => handleInputCard(event, 'card-number')}
+              onInput={(event) => handleInputCard(event, CARDNUMBER)}
             />
-            { getErrorText('card-number') }
+            { getErrorText(CARDNUMBER) }
           </label>
           <label className={creditCard('label')}>
             <p className={creditCard('label-title')}>Держатель карты</p>
@@ -172,20 +174,20 @@ const CreditCard = ({handleExternal}:{handleExternal: any}) => {
               type="text"
               value={cardHolder ? cardHolder : ""}
               className={creditCard('input')}
-              onInput={(event) => handleInputCard(event, 'card-holder')}
+              onInput={(event) => handleInputCard(event, CARDHOLDER)}
             />
-            { getErrorText('card-holder') }
+            { getErrorText(CARDHOLDER) }
           </label>
           <div className={creditCard('group')}>
             <label className={creditCard('label',{expires: true})}>
               <p className={creditCard('label-title')}>Срок хранения</p>
               <div className={creditCard('expires')}>
                 <div className={creditCard('expires-item')}>
-                  <select
+                  <select defaultValue={"Month"}
                     className={creditCard('select')}
-                    onChange={(event) => handleChangeCard(event, 'card-month')}
+                    onChange={(event) => handleChangeCard(event, CARDMONTH)}
                   >
-                    <option defaultValue={""} disabled>
+                    <option disabled>
                       Month
                     </option>
                     {mountArray.map((item, i) => (
@@ -194,14 +196,14 @@ const CreditCard = ({handleExternal}:{handleExternal: any}) => {
                       </option>
                     ))}
                   </select>
-                  { getErrorText('card-month') }
+                  { getErrorText(CARDMONTH) }
                 </div>
                 <div className={creditCard('expires-item')}>
-                  <select
+                  <select defaultValue={"Year"}
                     className={creditCard('select')}
-                    onChange={(event) => handleChangeCard(event, 'card-year')}
+                    onChange={(event) => handleChangeCard(event, CARDYEAR)}
                   >
-                    <option defaultValue={""} disabled>
+                    <option disabled>
                       Year
                     </option>
                     {yearArray.map((item, i) => (
@@ -210,7 +212,7 @@ const CreditCard = ({handleExternal}:{handleExternal: any}) => {
                       </option>
                     ))}
                   </select>
-                  { getErrorText('card-year') }
+                  { getErrorText(CARDYEAR) }
                 </div>
               </div>
             </label>
@@ -222,9 +224,9 @@ const CreditCard = ({handleExternal}:{handleExternal: any}) => {
                 className={creditCard('input')}
                 onFocus={() => setIsFlip(true)}
                 onBlur={() => setIsFlip(false)}
-                onInput={(event) => handleInputCard(event, 'card-cvv')}
+                onInput={(event) => handleInputCard(event, CARDCVV)}
               />
-              { getErrorText('card-cvv') }
+              { getErrorText(CARDCVV) }
             </label>
           </div>
         </div>

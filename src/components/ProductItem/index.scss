@@ -1,8 +1,10 @@
+@import '../../assets/scss/variable.scss';
+
 .product-item {
   display: flex;
   flex-direction: column;
   width: 100%;
-  border: 1px solid #aeaeae;
+  border: 1px solid $gray-light;
   border-radius: 10px;
   overflow: hidden;
   &__image {
@@ -11,7 +13,7 @@
   &__info {
     padding: 5px 10px;
     height: 100%;
-    background-color: #d2eee0;
+    background-color: $white;
     display: flex;
     flex-direction: column;
     gap: 5px;
@@ -19,6 +21,14 @@
     @media (min-width: 640px) {
       padding: 5px 20px;
     }
+  }
+  &__cart-info {
+    text-align: center;
+    margin-top: auto;
+    padding: 6px 15px;
+  }
+  &__button {
+    margin-top: auto;
   }
   @media (min-width: 640px) {
     width: calc((100% - 20px) / 2);
