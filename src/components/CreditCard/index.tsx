@@ -130,7 +130,7 @@ const CreditCard: React.FC<ICreditCard> = ({handleExternal}) => {
             <div className={creditCard("inner")}>
               <p className={creditCard('number')}>{cardMask("#### #### #### ####", cardNumber ?? "")}</p>
               <div className={creditCard('content')}>
-                <p className={creditCard('card-text')}>
+                <p className={creditCard('card-text',{full: true})}>
                   <span className={creditCard('card-title')}>Card Holder</span>
                   {cardHolder ?? "Full Name"}
                 </p>
