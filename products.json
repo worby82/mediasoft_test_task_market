@@ -10,7 +10,7 @@
     },
     "image": "/mediasoft_test_task_market/images/1.png",
     "brand": 9,
-    "raiting": 3.5
+    "rating": 3.5
   },
   {
     "type": "configurable",
@@ -136,7 +136,7 @@
       }
     ],
     "brand": 1,
-    "raiting": 1.0
+    "rating": 1.0
   },
   {
     "type": "simple",
@@ -149,7 +149,7 @@
     },
     "image": "/mediasoft_test_task_market/images/2.png",
     "brand": 8,
-    "raiting": 3.7
+    "rating": 3.7
   },
   {
     "type": "simple",
@@ -162,7 +162,7 @@
     },
     "image": "/mediasoft_test_task_market/images/3.png",
     "brand": 2,
-    "raiting": 4.8
+    "rating": 4.8
   },
   {
     "type": "simple",
@@ -175,7 +175,7 @@
     },
     "image": "/mediasoft_test_task_market/images/4.png",
     "brand": 7,
-    "raiting": 3.1
+    "rating": 3.1
   },
   {
     "type": "simple",
@@ -188,7 +188,7 @@
     },
     "image": "/mediasoft_test_task_market/images/5.png",
     "brand": 3,
-    "raiting": 3.6
+    "rating": 3.6
   },
   {
     "type": "simple",
@@ -201,7 +201,7 @@
     },
     "image": "/mediasoft_test_task_market/images/6.png",
     "brand": 6,
-    "raiting": 5.0
+    "rating": 5.0
   },
   {
     "type": "configurable",
@@ -327,7 +327,7 @@
       }
     ],
     "brand": 4,
-    "raiting": 4.3
+    "rating": 4.3
   },
   {
     "type": "simple",
@@ -340,7 +340,7 @@
     },
     "image": "/mediasoft_test_task_market/images/7.png",
     "brand": 5,
-    "raiting": 2.7
+    "rating": 2.7
   },
   {
     "type": "configurable",
@@ -466,7 +466,7 @@
       }
     ],
     "brand": 3,
-    "raiting": 4.6
+    "rating": 4.6
   },
   {
     "type": "simple",
@@ -479,7 +479,7 @@
     },
     "image": "/mediasoft_test_task_market/images/8.png",
     "brand": 1,
-    "raiting": 3.9
+    "rating": 3.9
   },
   {
     "type": "simple",
@@ -492,6 +492,6 @@
     },
     "image": "/mediasoft_test_task_market/images/9.png",
     "brand": 2,
-    "raiting": 4.1
+    "rating": 4.1
   }
 ]
