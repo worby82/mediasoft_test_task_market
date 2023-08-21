@@ -30,7 +30,7 @@ const StepTabs = () => {
   };
 
   useEffect(() => {
-    if (stepIndex) {
+    if (stepIndex === components.length) {
       dispatch(clearCartProduct());
     }
     // eslint-disable-next-line
@@ -59,23 +59,13 @@ const StepTabs = () => {
               return (
                 <div key={i} className={stepTabs("content")}>
                   {component}
-                  {i + 1 < components.length ? (
-                    <Button
-                      text="Далее"
-                      disabled={!isEnableNextButton}
-                      handleExternal={
-                        isEnableNextButton ? handleClickNext : undefined
-                      }
-                    />
-                  ) : (
-                    <Button
-                      text="Заказать"
-                      disabled={!isEnableNextButton}
-                      handleExternal={
-                        isEnableNextButton ? handleClickNext : undefined
-                      }
-                    />
-                  )}
+                  <Button
+                    text={i + 1 < components.length ? 'Далее' : 'Заказать'}
+                    disabled={!isEnableNextButton}
+                    handleExternal={
+                      isEnableNextButton ? handleClickNext : undefined
+                    }
+                  />
                 </div>
               );
             }

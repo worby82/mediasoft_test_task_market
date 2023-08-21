@@ -1,4 +1,4 @@
-import { useEffect, useState } from "react";
+import { useEffect, useState, useCallback } from "react";
 import { useDispatch, useSelector } from "react-redux";
 import { RootState } from "../../store";
 import { setCartProduct } from "../../store/reducers/data/cartDataSlice";
@@ -19,9 +19,9 @@ import getBrandTitle from "../../utils/getBrandTitle";
 
 import ConfigurableOptions from "../ConfigurableOptions";
 import Button from "../../UI/Button";
+import Rating from "../../UI/Rating";
 
 import "./index.scss";
-import Rating from "../../UI/Rating";
 
 const productItem = bemClassName("product-item");
 
@@ -58,7 +58,7 @@ const ProductItem: React.FC<IProductItemProps> = ({ product }) => {
     }
   };
 
-  const handleAddToCart = () => {
+  const handleAddToCart = useCallback(() => {
 
     const cartAtributes =
       product.type === CONFIGURABLE && selectedVariant
@@ -76,12 +76,8 @@ const ProductItem: React.FC<IProductItemProps> = ({ product }) => {
         : undefined;
 
     const cartProduct = {
-      id: product.type === CONFIGURABLE && selectedVariant
-          ? selectedVariant.product.id
-          : product.id,
-      image: product.type === CONFIGURABLE && selectedVariant
-          ? selectedVariant.product.image
-          : product.image,
+      id: selectedVariant?.product.id ?? product.id,
+      image: selectedVariant?.product.image ?? product.image,
       title: product.title,
       regular_price: product.regular_price,
       attributes: cartAtributes,
@@ -89,7 +85,7 @@ const ProductItem: React.FC<IProductItemProps> = ({ product }) => {
       brand: getBrandTitle(product.brand, brands) ?? "",
     };
     dispatch(setCartProduct(cartProduct));
-  };
+  }, [selectedVariant]);
 
   useEffect(() => {
     if (selectedOptions.length === product.configurable_options?.length) {
