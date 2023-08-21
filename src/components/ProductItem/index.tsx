@@ -19,9 +19,9 @@ import getBrandTitle from "../../utils/getBrandTitle";
 
 import ConfigurableOptions from "../ConfigurableOptions";
 import Button from "../../UI/Button";
-import Raiting from "../../UI/Raiting";
 
 import "./index.scss";
+import Rating from "../../UI/Rating";
 
 const productItem = bemClassName("product-item");
 
@@ -35,6 +35,9 @@ const ProductItem: React.FC<IProductItemProps> = ({ product }) => {
   const [isHasInCart, setIsHasInCart] = useState(false);
 
   const dispatch = useDispatch();
+
+  const getSelectedOption = (option: IConfigurableOption) => selectedOptions.find((item: ISelectedOption) => item.code === option.attribute_code)
+  const getFilteredOptions = (option: IConfigurableOption) => filteredOptions && filteredOptions.code !== option.attribute_code ? filteredOptions : undefined
 
   const handleSetSelectedOptions = (option: ISelectedOption) => {
     if (selectedOptions) {
@@ -144,7 +147,7 @@ const ProductItem: React.FC<IProductItemProps> = ({ product }) => {
         <p>
           {priceFormat(product.regular_price.currency, product.regular_price.value)}
         </p>
-        <Raiting count={product.raiting} full />
+        <Rating count={product.rating} full />
         {product.type === "configurable" ? (
           <>
             {product.configurable_options &&
@@ -154,8 +157,8 @@ const ProductItem: React.FC<IProductItemProps> = ({ product }) => {
                     key={option.attribute_id}
                     option={option}
                     handleExternal={handleSetSelectedOptions}
-                    selectedOption={selectedOptions.find((item: ISelectedOption) => item.code === option.attribute_code)}
-                    filteredOptions={ filteredOptions && filteredOptions.code !== option.attribute_code ? filteredOptions : undefined}
+                    selectedOption={getSelectedOption(option)}
+                    filteredOptions={getFilteredOptions(option)}
                   />
                 )
               )}

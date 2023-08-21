@@ -13,7 +13,7 @@ const Logo = () => {
     <Link className={logo()} to={"/mediasoft_test_task_market/"}>
       <img className={logo("image")} src={logoPNG} alt="Логотип" />
       <h3 className={logo("title")}>
-        Mediasoft
+        MEDIASOFT
         <br />
         Market
       </h3>

@@ -2,18 +2,17 @@ import { useEffect, useState } from "react";
 
 import Icon from "../Icon";
 
-import { IRaiting } from "./interface";
+import { IRating } from "./interface";
 import bemClassName from "../../utils/bem";
 
 import "./index.scss";
 
-const raiting = bemClassName("raiting");
+const rating = bemClassName("rating");
 
-const Raiting: React.FC<IRaiting> = ({
+const Rating: React.FC<IRating> = ({
   count,
   externalClassName = "",
   full,
-  reviews_count,
 }) => {
   const [countValue, setCountValue] = useState(0);
 
@@ -24,36 +23,36 @@ const Raiting: React.FC<IRaiting> = ({
     // eslint-disable-next-line
   }, []);
   return (
-    <div className={`${raiting()} ${externalClassName}`}>
+    <div className={`${rating()} ${externalClassName}`}>
       {count ? (
         <>
           {full && (
-            <p className={raiting("text")}>
+            <p className={rating("text")}>
               {Math.floor(count)},{Math.floor((count % 1) * Math.pow(10, 1))}
             </p>
           )}
-          <div className={raiting("stars")}>
+          <div className={rating("stars")}>
             {[...Array(5)].map((item, id) => {
               return (
-                <div key={id} className={raiting("item")}>
-                  <Icon iconName="star" externalClassName={raiting("icon")} />
+                <div key={id} className={rating("item")}>
+                  <Icon iconName="star" externalClassName={rating("icon")} />
                   {id + 1 <= Math.trunc(count) && (
-                    <div className={raiting("gold-icon-wrapper")}>
+                    <div className={rating("gold-icon-wrapper")}>
                       <Icon
                         iconName="star"
-                        externalClassName={raiting("icon", { gold: true })}
+                        externalClassName={rating("icon", { gold: true })}
                       />
                     </div>
                   )}
                   {id + 1 === Math.trunc(count) + 1 &&
                     Math.floor((count % 1) * 100) > 0 && (
                       <div
-                        className={raiting("gold-icon-wrapper")}
+                        className={rating("gold-icon-wrapper")}
                         style={{ width: `${Math.floor((count % 1) * 100)}%` }}
                       >
                         <Icon
                           iconName="star"
-                          externalClassName={raiting("icon", { gold: true })}
+                          externalClassName={rating("icon", { gold: true })}
                         />
                       </div>
                     )}
@@ -61,39 +60,36 @@ const Raiting: React.FC<IRaiting> = ({
               );
             })}
           </div>
-          {reviews_count && (
-            <p className={raiting("reviews-count")}>{reviews_count} отзывов</p>
-          )}
         </>
       ) : (
-        <div className={raiting("stars")}>
+        <div className={rating("stars")}>
           {[...Array(5)].map((item, id) => {
             return (
               <div
                 key={id}
-                className={raiting("item", { clickable: !count })}
+                className={rating("item", { clickable: !count })}
                 onClick={() => setCountValue(id + 1)}
               >
-                <Icon iconName="star" externalClassName={raiting("icon")} />
+                <Icon iconName="star" externalClassName={rating("icon")} />
                 {id + 1 <= Math.trunc(countValue) && (
-                  <div className={raiting("gold-icon-wrapper")}>
+                  <div className={rating("gold-icon-wrapper")}>
                     <Icon
                       iconName="star"
-                      externalClassName={raiting("icon", { gold: true })}
+                      externalClassName={rating("icon", { gold: true })}
                     />
                   </div>
                 )}
                 {id + 1 === Math.trunc(countValue) + 1 &&
                   Math.floor((countValue % 1) * 100) > 0 && (
                     <div
-                      className={raiting("gold-icon-wrapper")}
+                      className={rating("gold-icon-wrapper")}
                       style={{
                         width: `${Math.floor((countValue % 1) * 100)}%`,
                       }}
                     >
                       <Icon
                         iconName="star"
-                        externalClassName={raiting("icon", { gold: true })}
+                        externalClassName={rating("icon", { gold: true })}
                       />
                     </div>
                   )}
@@ -106,4 +102,4 @@ const Raiting: React.FC<IRaiting> = ({
   );
 };
 
-export default Raiting;
+export default Rating;

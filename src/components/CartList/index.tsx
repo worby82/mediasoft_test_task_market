@@ -1,15 +1,15 @@
 import { useSelector } from "react-redux";
 import { RootState } from "../../store";
+import { useNavigate } from "react-router-dom";
 
 import { ICartProduct } from "../../app_interfaces";
 
 import CartProduct from "../CartProduct";
+import Button from "../../UI/Button";
 
+import priceFormat from "../../utils/priceFormat";
 import bemClassName from "../../utils/bem";
 import "./index.scss";
-import priceFormat from "../../utils/priceFormat";
-import { useNavigate } from "react-router-dom";
-import Button from "../../UI/Button";
 
 const cartList = bemClassName("cart-list");
 

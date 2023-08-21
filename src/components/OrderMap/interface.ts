@@ -1,0 +1,1 @@
+export interface IOrderMap { handleExternal: any }

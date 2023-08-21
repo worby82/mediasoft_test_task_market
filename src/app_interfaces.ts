@@ -10,7 +10,7 @@ export interface IProductItem {
   configurable_options?: Array<IConfigurableOption>
   variants?: Array<IVariant>
   brand: number
-  raiting: number
+  rating: number
 }
 export interface IRegularPrice {
   currency: string

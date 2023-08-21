@@ -1,6 +1,5 @@
-export interface IRaiting {
+export interface IRating {
   count?: number
   externalClassName?: string
   full?: boolean
-  reviews_count?: number
 }

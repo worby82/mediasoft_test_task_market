@@ -7,7 +7,7 @@ import {
 } from "../../store/reducers/data/productsDataSlice";
 
 import { SortedValue } from "../../app_types";
-import { NAME, PRICE, RAITING } from "../../app_constants";
+import { NAME, PRICE, RATING } from "../../app_constants";
 
 import bemClassName from "../../utils/bem";
 import "./index.scss";
@@ -40,7 +40,7 @@ const Sorting = () => {
         <option defaultValue={""}>По умолчанию</option>
         <option value={NAME}>По названию</option>
         <option value={PRICE}>По цене</option>
-        <option value={RAITING}>По рейтингу</option>
+        <option value={RATING}>По рейтингу</option>
       </select>
     </div>
   );

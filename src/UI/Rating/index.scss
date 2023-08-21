@@ -1,14 +1,10 @@
 @import '../../assets/scss/variable.scss';
 
-.raiting {
+.rating {
   display: flex;
   align-items: center;
   justify-content: flex-start;
   column-gap: 4px;
-  &__reviews-count {
-    margin-left: 6px;
-    opacity: 0.6;
-  }
   &__stars {
     display: flex;
     justify-content: flex-start;
@@ -41,10 +37,6 @@
     &--clickable {
       &:hover {
         cursor: pointer;
-        // .raiting__icon {
-        //   opacity: .2;
-        //     fill: $yellow;
-        // }
       }
     }
   }

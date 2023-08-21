@@ -11,7 +11,6 @@ const Icon: React.FC<IIcon> = ({
   externalClassName = "",
   stroke,
   iconName,
-  handleClick,
 }) => {
   return (
     <svg
@@ -20,7 +19,6 @@ const Icon: React.FC<IIcon> = ({
       })} ${externalClassName}`}
       xmlns="http://www.w3.org/2000/svg"
       xmlnsXlink="http://www.w3.org/1999/xlink"
-      onClick={handleClick}
     >
       <use xlinkHref={`${icons}#${iconName}`}></use>
     </svg>

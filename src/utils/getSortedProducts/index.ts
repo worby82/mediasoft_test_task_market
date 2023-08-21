@@ -1,4 +1,4 @@
-import { NAME, PRICE, RAITING } from "../../app_constants"
+import { NAME, PRICE, RATING } from "../../app_constants"
 import { IProductItem } from "../../app_interfaces"
 import { SortedValue } from "../../app_types"
 
@@ -11,8 +11,8 @@ export function getSortedProducts(products: Array<IProductItem>, sortedValue: nu
     case PRICE:
       return [...products].sort((prev, next) => prev.regular_price.value - next.regular_price.value)
 
-    case RAITING:
-      return [...products].sort((prev, next) => next.raiting - prev.raiting)
+    case RATING:
+      return [...products].sort((prev, next) => next.rating - prev.rating)
 
     default:
       return products

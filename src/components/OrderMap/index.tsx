@@ -1,14 +1,17 @@
-import { useEffect, useState } from "react";
+import React, { useEffect, useState } from "react";
 import { YMaps } from "@pbe/react-yandex-maps";
+
+import { IOrderMap } from "./interface";
 
 import Map from "../Map";
 
-import "./index.scss";
 import bemClassName from "../../utils/bem";
+
+import "./index.scss";
 
 const orderMap = bemClassName("order-map");
 
-const OrderMap = ({ handleExternal }: { handleExternal: any }) => {
+const OrderMap: React.FC<IOrderMap> = ({ handleExternal }) => {
   const [address, setAddress] = useState("");
 
   useEffect(() => {

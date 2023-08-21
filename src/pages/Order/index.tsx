@@ -14,7 +14,7 @@ const order = bemClassName("order");
 
 const Order = () => {
   useEffect(() => {
-    document.title = "Оформление заказа | Mediasoft Market";
+    document.title = "Оформление заказа | MEDIASOFT Market";
   }, []);
 
   return (

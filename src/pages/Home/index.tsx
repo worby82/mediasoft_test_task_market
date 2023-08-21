@@ -12,7 +12,7 @@ const home = bemClassName("home");
 
 const Home = () => {
   useEffect(() => {
-    document.title = "Mediasoft Market";
+    document.title = "MEDIASOFT Market";
   }, []);
 
   return (

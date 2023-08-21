@@ -72,12 +72,12 @@ const CreditCard: React.FC<ICreditCard> = ({handleExternal}) => {
       case CARDMONTH:
         setCardMonth(event.target.value)
         break;
-        case CARDYEAR:
-          setCardYear(event.target.value.slice(2))
-          break;
-        }
-      };
-      
+      case CARDYEAR:
+        setCardYear(event.target.value.slice(2))
+        break;
+    }
+  };
+  
   useEffect(()=>{
     if(cardNumber !== null) {
       handleCardDataRequired({name: CARDNUMBER, valid: cardNumber.length === 19 ? true : false})

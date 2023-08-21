@@ -10,7 +10,7 @@ const cart = bemClassName("cart");
 
 const Cart = () => {
   useEffect(() => {
-    document.title = "Корзина | Mediasoft Market";
+    document.title = "Корзина | MEDIASOFT Market";
   }, []);
 
   return (

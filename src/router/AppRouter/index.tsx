@@ -8,8 +8,6 @@ import Home from "../../pages/Home";
 import Cart from "../../pages/Cart";
 import Order from "../../pages/Order";
 
-import "./index.scss";
-
 function AppRouter() {
   return (
     <Container>
